@@ -1,0 +1,21 @@
+{
+  "name": "cli-file-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zankorrr/CLI-file-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zankorrr/CLI-file-manager/issues"
+  },
+  "homepage": "https://github.com/Zankorrr/CLI-file-manager#readme"
+}
