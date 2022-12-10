@@ -2,6 +2,7 @@ import { homedir } from 'os'
 import path from 'path'
 import readline from 'readline/promises'
 import currentlyIn from './handlers/currentlyIn.js'
+import goUpper from './handlers/goUpper.js'
 
 const username = process.argv.find((item) => item.startsWith('--username='))?.slice(11) || 'Anonymous'
 const root = path.parse(homedir()).root
@@ -15,23 +16,24 @@ const rl = readline.createInterface({
 })
 
 rl.on('line', (input) => {
-  switch (true) {
-    case (input === 'up' || input === '..'):
-      if (process.cwd() !== root) {
-        process.chdir('..')
-      }
-      currentlyIn()
-      break;
-    case (input === '.exit'):
+  input = input.trim()
+  let [command, ...args] = input.split(' ')
+  switch (command) {
+    case ('up'):
+    case ('..'):
+      goUpper(root)
+      break
+    case ('.exit'):
       rl.close()
-      break;
+      break
     default:
       console.log('Invalid input');
       currentlyIn()
-      break;
+      break
   }
 })
   .on('SIGINT', () => rl.close())
   .on('close', () => {
     console.log(`\nThank you for using File Manager, ${username}, goodbye!\n`)
+    process.nextTick(() => process.exit())
   })
