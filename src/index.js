@@ -2,6 +2,7 @@ import { homedir } from 'os'
 import path from 'path'
 import readline from 'readline/promises'
 import currentlyIn from './handlers/currentlyIn.js'
+import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
 
 const username = process.argv.find((item) => item.startsWith('--username='))?.slice(11) || 'Anonymous'
@@ -15,25 +16,28 @@ const rl = readline.createInterface({
   output: process.stdout
 })
 
-rl.on('line', (input) => {
-  input = input.trim()
-  let [command, ...args] = input.split(' ')
+rl.on("line", (input) => {
+  input = input.trim();
+  let [command, ...args] = input.split(" ");
   switch (command) {
-    case ('up'):
-    case ('..'):
-      goUpper(root)
-      break
-    case ('.exit'):
-      rl.close()
-      break
+    case "ls":
+      filesList();
+      break;
+    case "up":
+    case "..":
+      goUpper(root);
+      break;
+    case ".exit":
+      rl.close();
+      break;
     default:
-      console.log('Invalid input');
-      currentlyIn()
-      break
+      console.log("Invalid input");
+      currentlyIn();
+      break;
   }
 })
-  .on('SIGINT', () => rl.close())
-  .on('close', () => {
-    console.log(`\nThank you for using File Manager, ${username}, goodbye!\n`)
-    process.nextTick(() => process.exit())
-  })
+  .on("SIGINT", () => rl.close())
+  .on("close", () => {
+    console.log(`\nThank you for using File Manager, ${username}, goodbye!\n`);
+    process.nextTick(() => process.exit());
+  });
