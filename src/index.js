@@ -1,6 +1,7 @@
 import { homedir } from 'os'
 import path from 'path'
 import readline from 'readline/promises'
+import changeDir from './handlers/changeDir.js'
 import currentlyIn from './handlers/currentlyIn.js'
 import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
@@ -20,6 +21,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "cd":
+      changeDir(args[0]);
+      break;
     case "ls":
       filesList();
       break;
