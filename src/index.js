@@ -5,6 +5,7 @@ import changeDir from './handlers/changeDir.js'
 import copyFileStream from './handlers/copyFile.js'
 import createFile from './handlers/createFile.js'
 import currentlyIn from './handlers/currentlyIn.js'
+import deleteFile from './handlers/deleteFile.js'
 import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
 import moveFileStream from './handlers/moveFile.js'
@@ -26,6 +27,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "rm":
+      deleteFile(args)
+      break;
     case "mv":
       moveFileStream(args)
       break;
