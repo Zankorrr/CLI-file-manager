@@ -5,6 +5,7 @@ import changeDir from './handlers/changeDir.js'
 import currentlyIn from './handlers/currentlyIn.js'
 import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
+import readFile from './handlers/readFile.js'
 
 const username = process.argv.find((item) => item.startsWith('--username='))?.slice(11) || 'Anonymous'
 const root = path.parse(homedir()).root
@@ -21,6 +22,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "cat":
+      readFile(args[0])
+      break;
     case "cd":
       changeDir(args[0]);
       break;
