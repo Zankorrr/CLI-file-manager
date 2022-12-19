@@ -2,6 +2,7 @@ import { homedir } from 'os'
 import path from 'path'
 import readline from 'readline/promises'
 import changeDir from './handlers/changeDir.js'
+import copyFileStream from './handlers/copyFile.js'
 import createFile from './handlers/createFile.js'
 import currentlyIn from './handlers/currentlyIn.js'
 import filesList from './handlers/filesList.js'
@@ -24,6 +25,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "cp":
+      copyFileStream(args)
+      break;
     case "rn":
       renameFile(args)
       break;
