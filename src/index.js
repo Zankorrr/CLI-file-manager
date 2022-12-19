@@ -7,6 +7,7 @@ import currentlyIn from './handlers/currentlyIn.js'
 import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
 import readFile from './handlers/readFile.js'
+import renameFile from './handlers/renameFile.js'
 
 const username = process.argv.find((item) => item.startsWith('--username='))?.slice(11) || 'Anonymous'
 const root = path.parse(homedir()).root
@@ -23,6 +24,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "rn":
+      renameFile(args)
+      break;
     case "add":
       createFile(args[0])
       break;
