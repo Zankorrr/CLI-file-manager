@@ -7,6 +7,7 @@ import createFile from './handlers/createFile.js'
 import currentlyIn from './handlers/currentlyIn.js'
 import filesList from './handlers/filesList.js'
 import goUpper from './handlers/goUpper.js'
+import moveFileStream from './handlers/moveFile.js'
 import readFile from './handlers/readFile.js'
 import renameFile from './handlers/renameFile.js'
 
@@ -25,6 +26,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "mv":
+      moveFileStream(args)
+      break;
     case "cp":
       copyFileStream(args)
       break;
