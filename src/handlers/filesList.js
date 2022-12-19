@@ -1,6 +1,7 @@
 import { readdir, stat } from 'fs/promises'
 import path from 'path'
 import currentlyIn from './currentlyIn.js'
+import operationFiled from './operationFailed.js'
 
 const filesList = async () => {
   try {
@@ -11,11 +12,9 @@ const filesList = async () => {
     //   console.log(`${el} - ${str}`)
     // })
     console.table(files)
-  } catch (err) {
-    const error = new Error("Operation failed")
-    console.log(error)
-  } finally {
     currentlyIn()
+  } catch (err) {
+    operationFiled()
   }
 }
 

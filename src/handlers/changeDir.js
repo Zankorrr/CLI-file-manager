@@ -1,13 +1,14 @@
 import currentlyIn from "./currentlyIn.js"
+import operationFiled from "./operationFailed.js"
+import { access } from 'node:fs/promises'
 
-const changeDir = (arg) => {
+const changeDir = async (arg) => {
   try {
+    await access(arg)
     process.chdir(arg)
-  } catch(err) {
-    const error = new Error("Operation failed")
-    console.log(error)
-  } finally {
     currentlyIn()
+  } catch(err) {
+    operationFiled()
   }
 }
 
