@@ -1,6 +1,7 @@
 import { homedir } from 'os'
 import path from 'path'
 import readline from 'readline/promises'
+import calculateHash from './handlers/calculateHash.js'
 import changeDir from './handlers/changeDir.js'
 import copyFileStream from './handlers/copyFile.js'
 import createFile from './handlers/createFile.js'
@@ -27,6 +28,9 @@ rl.on("line", (input) => {
   input = input.trim();
   let [command, ...args] = input.split(" ");
   switch (command) {
+    case "hash":
+      calculateHash(args)
+      break;
     case "rm":
       deleteFile(args)
       break;
